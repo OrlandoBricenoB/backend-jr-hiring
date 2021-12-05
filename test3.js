@@ -1,5 +1,5 @@
-const sift = require('sift');
-const { BadRequest, NotFound, ServerError } = require('./test/utils/errors');
+const sift = require('sift')
+const { BadRequest, NotFound } = require('./test/utils/errors')
 
 class Server {
   constructor (db) {
@@ -53,4 +53,4 @@ class Server {
   }
 }
 
-module.exports = Server;
+module.exports = Server
