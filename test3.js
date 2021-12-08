@@ -41,14 +41,11 @@ class Server {
   }
 
   updateOne(collectionName, id, properties) {
-    const query = id && { id: { $eq: id } }
-    const [error, collection] = this._getCollection(collectionName, query, properties)
-    if (error) return this._editNotFoundMsg(error, 'No data for update found with the id equal as "null".') 
+    const document = this.findOne(collectionName, id)
+    if (document instanceof BadRequest) return document
+    if (document instanceof NotFound) return this._editNotFoundMsg(document, 'No data for update found with the id equal as "null".') 
 
-    const queryDocuments = collection.filter(sift(query))
-    const [ firstDocument ] = queryDocuments
-
-    const updatedDocument = Object.assign(firstDocument, properties)
+    const updatedDocument = Object.assign(document, properties)
     return updatedDocument
   }
 }
