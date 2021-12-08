@@ -42,8 +42,7 @@ class Server {
 
   updateOne(collectionName, id, properties) {
     const document = this.findOne(collectionName, id)
-    if (document instanceof BadRequest) return document
-    if (document instanceof NotFound) return this._editNotFoundMsg(document, 'No data for update found with the id equal as "null".') 
+    if (document instanceof Error) return this._editNotFoundMsg(document, 'No data for update found with the id equal as "null".') 
 
     const updatedDocument = Object.assign(document, properties)
     return updatedDocument
