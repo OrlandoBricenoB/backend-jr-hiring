@@ -17,7 +17,7 @@ class Server {
   }
 
   _editNotFoundMsg(error, message) {
-    error.message = message
+    if (error instanceof NotFound) error.message = message
     return error
   }
 
